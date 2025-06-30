@@ -14,6 +14,16 @@ generation_config = {
     "max_output_tokens": 1024,
     "response_mime_type": "text/plain",
 }
+def generate_design_idea(style, size, rooms):
+    context = f"Generate a home design idea for a {size} house with {rooms} rooms in {style} style."
+    if len(context) > 3000:
+        context = context[:3000]  # Optional safety
+    try:
+        response = model.generate_content(context)
+        return response.text
+    except Exception as e:
+        return f"Error generating design idea: {str(e)}"
+
 
 # Function to generate home design ideas
 def generate_design_idea(style, size, rooms):
